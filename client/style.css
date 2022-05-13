@@ -4,6 +4,7 @@ html{
     height: 100vh;
     background-color: cadetblue;
     font-family: 'Roboto Mono', monospace;
+    box-sizing: border-box;
 }
 .wrapper *:not(form *){
     width: 30vw;
@@ -39,6 +40,11 @@ html{
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
+}
+.userWrapper{
+    display: flex;
+    flex-flow: column wrap;
+    row-gap: 10px;
 }
 .userView{
     display: none;
@@ -124,3 +130,7 @@ button {
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+
+.me{
+    background-color: darksalmon;
+}

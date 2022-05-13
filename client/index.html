@@ -8,14 +8,18 @@
     <title>Messaging Easy</title>
 </head>
 <body>
+    <div class="name"></div>
     <div class="wrapper">
         <div class="header">Messaging App Example</div>
         <div class="usersList">
             <div class="userTitle"> Users List</div>
-            <div class="user">Abrish</div>
-            <div class="user">Ermi</div>
-            <div class="user">Tinsaye</div>
-            <div class="user">Melat</div>
+            <div class="userWrapper">
+                <div class="user me">Abrish</div>
+                <div class="user">Ermi</div>
+                <div class="user">Tinsaye</div>
+                <div class="user">Melat</div>
+                </div>
+            
         </div>
         <div class="userView">
             <div class="user">Abrish</div>
@@ -34,6 +38,7 @@
     </div>
 
     <div class="bottom">Developed By Abrish</div>
-    <script src="client.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js" defer></script>
 </body>
 </html>
