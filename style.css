@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+html{
+    width: 100vw;
+    height: 100vh;
+    background-color: cadetblue;
+    font-family: 'Roboto Mono', monospace;
+}
+.wrapper *:not(form *){
+    width: 30vw;
+}
+.wrapper{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    height: 95vh;
+    row-gap: 10px;
+}
+.header{
+    background-color: darksalmon;
+    text-align: center;
+    padding-block: 5px;
+    border-radius: 8px;
+}
+.usersList{
+    display: flex;
+    flex-flow: column wrap;
+    text-align: center;
+    row-gap: 10px;
+}
+.usersList .userTitle{
+    padding-block: 5px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.user{
+    background-color: lightblue;
+    padding-block: 2px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.userView{
+    display: none;
+    /* display: flex; */
+    flex-flow: column wrap;
+    row-gap: 10px;
+}
+.display{
+    display: flex;
+    flex-flow: column wrap;
+    background-color: lightsteelblue;
+    padding-inline: 20px;
+    padding-block: 10px;
+    box-sizing: border-box;
+    min-height: 10vw;
+}
+.you{
+    align-self: flex-start;
+    background-color: lightskyblue;
+    padding-inline: 5px;
+    border-radius: 7px;
+    width: max-content !important;
+}
+.another{
+    align-self: flex-end;
+    background-color: lightgreen;
+    padding-inline: 5px;
+    border-radius: 7px;
+    width: max-content !important;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+}
+input{
+    padding: 15px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    height: 45px;
+    margin-left: 2px;
+    align-self: center;
+  }
+.bottom{
+    text-align: center;
+}
+
+@media only screen and (max-width: 1000px){
+    .wrapper *:not(form *){
+        width: 40vw;
+    }
+}
