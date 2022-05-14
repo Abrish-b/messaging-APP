@@ -1,8 +1,6 @@
 const socket = io();
 let List = {}
-let nameOfuser = null
 let renderdName = []
-let myName 
 //graping elements
 const wrapper = document.querySelector('.wrapper');
 // const users = document.querySelectorAll('.user');
@@ -37,7 +35,6 @@ function startAPP(){
         dispName.innerHTML = '';
         if(text == '') return
         handleForm(text)
-        nameOfuser = text
     })
 }
 
@@ -64,7 +61,6 @@ function renderAll(text, who=''){
     if(who === 'me') {
         user.classList.add('me');
         user.innerText = text + '(you)';
-        myName = text
     }
     else{
         user.innerText = text;
@@ -75,6 +71,7 @@ function renderAll(text, who=''){
             userList.style.display = 'none';
             userView.style.display = 'flex';
             userName.innerText = user.innerText;
+            userName.insertAdjacentHTML('afterbegin',`<i class="fa fa-solid fa-arrow-left"></i>`);
             displayChat(user.innerText);
         });
     }
