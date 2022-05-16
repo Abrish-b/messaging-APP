@@ -63,6 +63,7 @@ function renderAll(text, who=''){
         userView.style.display = 'none';
     })
     const user = document.createElement('div');
+    const call = document.createElement('div');
     user.classList.add('user');
     if(who === 'me') {
         user.classList.add('me');
@@ -70,6 +71,8 @@ function renderAll(text, who=''){
     }
     else{
         user.innerText = text;
+        call.innerHTML = '<i class="fa fa-solid fa-phone"></i>';
+        call.classList.add('call');
     }
     
     if(who !== 'me'){
@@ -81,8 +84,13 @@ function renderAll(text, who=''){
             
             displayChat(user.innerText);
         });
+        call.addEventListener('click' ,()=>{
+            console.log('clickde call');
+            location.href = '/call';
+        })
     }
-   userWrapper.appendChild(user);
+    user.appendChild(call);
+    userWrapper.appendChild(user);
     
 }
 

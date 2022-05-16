@@ -1,17 +1,20 @@
 const http = require('http');
 const express = require('express');
 const socketio  = require('socket.io');
-
+const {v4: uuidV4 }=require('uuid')
 
 const app = express();
 app.set('view engine' , 'ejs')
 app.use(express.static(`${__dirname}/../client`));
 
 
-// app.get('/', (req, res) =>{
-//     console.log(req);
-//     res.render(`${__dirname}/../client/index.html`)
-// })
+app.get('/call', (req, res) =>{
+    res.redirect(`/${uuidV4()}`)
+})
+
+app.get('/:room', (req, res)=>{
+    res.render('room',{roomId:req.params.room})
+})
 
 const server = http.createServer(app);
 const io = socketio(server);
