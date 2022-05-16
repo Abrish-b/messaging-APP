@@ -44,9 +44,10 @@ html{
     cursor: pointer;
 }
 .user i{
+    width: 20px;
     position: absolute;
-    left: -150px;
     top: 5px;
+    left: 20px;
     display: inline;
 
 }

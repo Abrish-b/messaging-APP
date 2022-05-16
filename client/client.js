@@ -6,7 +6,9 @@ const wrapper = document.querySelector('.wrapper');
 // const users = document.querySelectorAll('.user');
 const userView = document.querySelector('.userView');
 const userList = document.querySelector('.usersList');
-const userName = document.querySelector('.userView .user');
+const userName = document.querySelector('.userView .user .userName');
+const userRecive = document.querySelector('.userView .user');
+const back = document.querySelector('.userView .user i');
 const form = document.querySelector('#form');
 const message = document.getElementById('message');
 const display = document.getElementById('display')
@@ -56,6 +58,10 @@ function handleForm(text){
 }
 
 function renderAll(text, who=''){
+    back.addEventListener('click', ()=>{
+        userList.style.display = 'flex';
+        userView.style.display = 'none';
+    })
     const user = document.createElement('div');
     user.classList.add('user');
     if(who === 'me') {
@@ -70,8 +76,9 @@ function renderAll(text, who=''){
         user.addEventListener('click', ()=>{
             userList.style.display = 'none';
             userView.style.display = 'flex';
+            // userRecive.insertAdjacentHTML('afterbegin',`<i class="fa fa-solid fa-arrow-left"></i>`);
             userName.innerText = user.innerText;
-            userName.insertAdjacentHTML('afterbegin',`<i class="fa fa-solid fa-arrow-left"></i>`);
+            
             displayChat(user.innerText);
         });
     }

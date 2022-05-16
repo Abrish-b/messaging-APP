@@ -4,8 +4,14 @@ const socketio  = require('socket.io');
 
 
 const app = express();
-
+app.set('view engine' , 'ejs')
 app.use(express.static(`${__dirname}/../client`));
+
+
+// app.get('/', (req, res) =>{
+//     console.log(req);
+//     res.render(`${__dirname}/../client/index.html`)
+// })
 
 const server = http.createServer(app);
 const io = socketio(server);
