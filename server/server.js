@@ -34,7 +34,16 @@ io.on('connection', socket=>{
         io.to(name).emit('mess', mess);
         console.log('sent ' + mess + ' to ' + name);
     } )
-   
+   //video call
+    socket.on('join-room', (roomId, userId) =>{
+        console.log(roomId, userId);
+        socket.join(roomId);
+        socket.to(roomId).emit('user-connected', userId)
+        socket.on('disconnect' , () =>{
+            socket.to(roomId).emit('user-disconnected', userId)
+        })
+    });
+
 })
 
 

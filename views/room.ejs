@@ -9,11 +9,19 @@
     <script>
         const RoomID = "<%= roomId %>"
     </script>
+    <!-- <link rel="stylesheet" href="../client/style.css"> -->
     <link rel="stylesheet" href="/style.css">
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="https://unpkg.com/peerjs@1.3.2/dist/peerjs.min.js" defer></script>
+    <!-- <script src="../client/js/view.js" defer></script> -->
+    <script src="js/view.js" defer></script>
     <title>Messaging Easy</title>
     <style>
         html{
             height: fit-content !important;
+        }
+        .wrapper{
+            flex-flow: row wrap;
         }
     </style>
 </head>
@@ -22,13 +30,16 @@
     <div class="name"></div>
     <div class="wrapper">
         <div class="header">Messaging App Example </div>
-        <div id=" video-grid">
+        <div id="video-grid">
+        </div>
+        <div class="toggler">
+            <div class="circle" id="vid-no"><i class="fa fa-video-camera"></i></div>
+            <div class="circle" id="mute"><i class="fa fa-microphone audio"></i></div>
         </div>
     </div>
     </div>
     <div class="bottom">Developed By Abrish</div>
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="view.js" defer></script>
+    
 </body>
 
 </html>
