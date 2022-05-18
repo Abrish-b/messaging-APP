@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server/server.js"
+    "dev": "nodemon server/server.js",
+    "build" : "node server/server.js && peerjs -p 3001"
   },
   "repository": {
     "type": "git",
