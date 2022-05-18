@@ -26,6 +26,7 @@ html{
 }
 .usersList{
     display: flex;
+    /* display: none; */
     flex-flow: column wrap;
     text-align: center;
     row-gap: 10px;
@@ -215,4 +216,43 @@ button {
 
 .red{
     background-color: red;
+}
+
+.incoming-call{
+    display: none;
+    background-color: lightgreen;
+    /* display: flex; */
+    flex-flow: column wrap;
+    align-items: center;
+}
+.callerName{
+    padding-top: 20px;
+    text-align: center;
+}
+.incoming-call i{
+    width: 20px !important;
+    height: 20px;
+}
+.pick{
+    display: flex;
+    justify-content: space-around;
+    padding-block: 30px;
+}
+.answer , .decline{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2px 2px 2px 20px;
+    width: 100px !important;
+    cursor: pointer;
+}
+.answer{
+    background-color: rgb(54, 195, 54);
+}
+.decline{
+    background-color: rgb(203, 65, 65);
+}
+
+.avatar img {
+    height: 200px;
+    padding-block: 40px;
 }

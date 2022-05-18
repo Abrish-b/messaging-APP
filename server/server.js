@@ -3,13 +3,18 @@ const express = require('express');
 const socketio  = require('socket.io');
 const {v4: uuidV4 }=require('uuid')
 
+let callList = {}
+
 const app = express();
 app.set('view engine' , 'ejs')
 app.use(express.static(`${__dirname}/../client`));
 
 
-app.get('/call', (req, res) =>{
-    res.redirect(`/${uuidV4()}`)
+app.get('/call/:user', (req, res) =>{
+    const unique = uuidV4();
+    res.redirect(`/${unique}`)
+    callList[req.params.user] = unique
+    console.log( callList ,' for user ' + req.params.user);
 })
 
 app.get('/:room', (req, res)=>{
@@ -43,7 +48,20 @@ io.on('connection', socket=>{
             socket.to(roomId).emit('user-disconnected', userId)
         })
     });
+    socket.on('call', (user, caller) =>{
+        console.log('caller ' ,caller);
+        const name = Object.keys(users).find(key => users[key] === user)
+        console.log('calling user: ' + user + ' with a name ' + name );
+        io.to(user).emit('incoming-call', caller);
+    })
 
+    socket.on('whoCalled',  user =>{
+        const uniqueuuid = callList[user];
+        console.log('link list ' + uniqueuuid);
+        io.to(users[user]).emit('link', uniqueuuid, () =>{
+            console.log('this is emited', uniqueuuid, ' to user ' + user);
+        })
+    })
 })
 
 

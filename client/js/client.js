@@ -1,6 +1,8 @@
 const socket = io();
 let List = {}
 let renderdName = []
+let me
+let caller
 //graping elements
 const wrapper = document.querySelector('.wrapper');
 // const users = document.querySelectorAll('.user');
@@ -17,7 +19,9 @@ const userWrapper = document.querySelector('.userWrapper');
 display.innerHTML = '';
 
 startAPP();
+Answer();
 receiveMessage();
+
 
 function startAPP(){
     userWrapper.innerHTML= ``;
@@ -68,6 +72,7 @@ function renderAll(text, who=''){
     if(who === 'me') {
         user.classList.add('me');
         user.innerText = text + '(you)';
+        me = text
     }
     else{
         user.innerText = text;
@@ -85,8 +90,9 @@ function renderAll(text, who=''){
             displayChat(user.innerText);
         });
         call.addEventListener('click' ,()=>{
-            console.log('clickde call');
-            location.href = '/call';
+            userView.style.display = 'none';
+            callUser(user.innerText)
+            location.href = `/call/${user.innerText}`;
         })
     }
     user.appendChild(call);
@@ -114,14 +120,46 @@ function displayMessage(mess, who='you') {
 }
 
 function receiveMessage(){
-    console.log('inside recive mess');
     socket.on('mess', mess=>{
-        console.log('recieved ' + mess);
+        // console.log('recieved ' + mess);
         displayMessage(mess,'another')
     });
 }
 
 function sendMessage(mess, user){
-    console.log('sent ' + mess + ' to ' + user);
-    socket.emit('to', mess , List[user])
+    // console.log('sent ' + mess + ' to ' + user);
+    socket.emit('to', mess , user)
+}
+
+function callUser(user){
+    socket.emit('call', List[user], me)
+}
+
+function Answer(){
+    const incomingCall = document.querySelector('.incoming-call');
+    const callerName = document.querySelector('.callerName');
+    
+    
+    socket.on('incoming-call', user => {
+        const audio = new Audio('/assets/audio/hello.mp3');
+        audio.play();
+        userList.style.display = 'none';
+        incomingCall.style.display = 'flex';
+        callerName.innerText =  user;
+        caller = user
+    })
+}
+
+
+function AnsweredVideo(){
+    socket.emit('whoCalled', me) 
+    socket.on('link', unique => {
+        location.href = `/${unique}`
+        })
+
+   
+}
+
+function decline(){
+
 }
