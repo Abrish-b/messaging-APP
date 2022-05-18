@@ -3,6 +3,7 @@ let List = {}
 let renderdName = []
 let me
 let caller
+let sex
 //graping elements
 const wrapper = document.querySelector('.wrapper');
 // const users = document.querySelectorAll('.user');
@@ -27,13 +28,20 @@ function startAPP(){
     userWrapper.innerHTML= ``;
     wrapper.style.display = 'none';
     const dispName = document.querySelector('.name');
-    dispName.innerHTML = `<h1> Write your name: </h1>
-    <form id="form1"><input type="text" id="name">
+    dispName.innerHTML = `<div class="nameWrapper"><h1> Write your Name and Gender </h1>
+    <form id="form1">
+    <input type="text" id="name">
+    <select name="gender" id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+  </select>
     <button id="submitButton">send</button>
     </form>
+    <div>
     `;
     const formName = document.querySelector('#form1');
     const name = document.querySelector('#name');
+    const gender = document.getElementById('gender');
 
     formName.addEventListener('submit', e=>{
         e.preventDefault()
@@ -41,6 +49,7 @@ function startAPP(){
         dispName.innerHTML = '';
         if(text == '') return
         handleForm(text)
+        sex = gender.value;
     })
 }
 
@@ -91,6 +100,7 @@ function renderAll(text, who=''){
         });
         call.addEventListener('click' ,()=>{
             userView.style.display = 'none';
+            socket.emit('on a call', me);
             callUser(user.innerText)
             location.href = `/call/${user.innerText}`;
         })
@@ -138,11 +148,15 @@ function callUser(user){
 function Answer(){
     const incomingCall = document.querySelector('.incoming-call');
     const callerName = document.querySelector('.callerName');
-    
+    const avatar = document.querySelector('.avatarImage');
     
     socket.on('incoming-call', user => {
         const audio = new Audio('/assets/audio/hello.mp3');
         audio.play();
+        if (gender = 'female') {
+            avatar.src = "/assets/images/avatar-svgrepo-com (2).svg"
+            avatar.alt = "avatar-female"
+        }
         userList.style.display = 'none';
         incomingCall.style.display = 'flex';
         callerName.innerText =  user;

@@ -84,3 +84,6 @@ function connectToNewUser(userID, stream){
     peers[userID] = call
 }
 
+function closeCall(){
+    console.log('close call');
+}

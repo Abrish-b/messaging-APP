@@ -92,15 +92,19 @@ html{
 
 form {
     display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: 1fr 1fr;
 }
 input{
+    grid-column: 1/4;
+    grid-row: 1/2;
     padding: 15px 10px;
     margin: 8px 0;
     box-sizing: border-box;
 }
 button {
+    grid-column: 2/4;
+    grid-row: 2/3;
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -113,6 +117,22 @@ button {
     margin-left: 2px;
     align-self: center;
   }
+
+.nameWrapper{
+    height: 90vh;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#gender{
+    grid-column: 4/5;
+    grid-row: 1/2;
+    margin-block: 8px;
+    margin-inline: 4px;
+}
+
 .bottom{
     text-align: center;
 }
@@ -256,3 +276,4 @@ button {
     height: 200px;
     padding-block: 40px;
 }
+
