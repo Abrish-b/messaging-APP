@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const socketio  = require('socket.io');
 const {v4: uuidV4 }=require('uuid')
-
+const PORT = process.env.PORT || 8080;
 let callList = {}
 
 const app = express();
@@ -83,6 +83,6 @@ server.on('error', (err)=> {
     console.error(err);
 })
 
-server.listen(8080,()=>{
-    console.log('server on port 8080 is ready!');
+server.listen(PORT,()=>{
+    console.log(`server on port ${PORT} is ready!`);
 })
