@@ -9,7 +9,8 @@ const socket = io()
 const myPeer = new Peer(undefined, {
     host: '/',
     // host: 'videomessengerapp.herokuapp.com',
-    port: '3001'
+    // port: '3001'
+    port: '433'
 })
 
 muteButton.addEventListener('click' ,() =>{
