@@ -16,11 +16,14 @@ const form = document.querySelector('#form');
 const message = document.getElementById('message');
 const display = document.getElementById('display')
 const userWrapper = document.querySelector('.userWrapper');
+const audio = new Audio('/assets/audio/hello.mp3');
+const incomingCall = document.querySelector('.incoming-call');
+const callerName = document.querySelector('.callerName');
+const avatar = document.querySelector('.avatarImage');
 
 display.innerHTML = '';
 
 startAPP();
-Answer();
 receiveMessage();
 
 
@@ -152,13 +155,7 @@ function callUser(calleduser){
     },1000)
 }
 
-function Answer(){
-    const incomingCall = document.querySelector('.incoming-call');
-    const callerName = document.querySelector('.callerName');
-    const avatar = document.querySelector('.avatarImage');
-    
-    socket.on('incoming-call', user => {
-        const audio = new Audio('/assets/audio/hello.mp3');
+socket.on('incoming-call', user => {
         audio.play();
         if (gender = 'female') {
             avatar.src = "/assets/images/avatar-svgrepo-com (2).svg"
@@ -169,7 +166,6 @@ function Answer(){
         callerName.innerText =  user;
         caller = user
     })
-}
 
 
 function AnsweredVideo(){
@@ -182,5 +178,7 @@ function AnsweredVideo(){
 }
 
 function decline(){
-
+    audio.pause();
+    userList.style.display = 'flex';
+    incomingCall.style.display = 'none';
 }
