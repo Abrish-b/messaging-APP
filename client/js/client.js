@@ -28,8 +28,11 @@ function startAPP(){
     userWrapper.innerHTML= ``;
     wrapper.style.display = 'none';
     const dispName = document.querySelector('.name');
-    dispName.innerHTML = `<div class="nameWrapper"><h1> Write your Name and Gender </h1>
-    <form id="form1">
+    dispName.innerHTML = `
+    <h1>Welcome to Messaging App</h1>
+    <div class="nameWrapper">
+    <h2> Write your Name and Gender </h2>
+    <form class="nameInput" id="form1">
     <input type="text" id="name">
     <select name="gender" id="gender">
         <option value="male">Male</option>
@@ -102,7 +105,6 @@ function renderAll(text, who=''){
             userView.style.display = 'none';
             socket.emit('on a call', me);
             callUser(user.innerText)
-            location.href = `/call/${user.innerText}`;
         })
     }
     user.appendChild(call);
@@ -141,8 +143,13 @@ function sendMessage(mess, user){
     socket.emit('to', mess , user)
 }
 
-function callUser(user){
-    socket.emit('call', List[user], me)
+function callUser(calleduser){
+    console.log('calling user' + calleduser);
+    socket.emit('call', calleduser , me )
+    console.log('this function emit call'); 
+    setTimeout(()=>{
+    location.href = `/call/${calleduser}`;
+    },1000)
 }
 
 function Answer(){

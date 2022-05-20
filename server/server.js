@@ -36,12 +36,11 @@ io.on('connection', socket=>{
         // socket.broadcast.emit('users', users)
     })
     socket.on('to', (mess,name) =>{
-        io.to(name).emit('mess', mess);
+        io.to(users[name]).emit('mess', mess);
         console.log('sent ' + mess + ' to ' + name);
     } )
    //video call
     socket.on('join-room', (roomId, userId) =>{
-        console.log(roomId, userId);
         socket.join(roomId);
         socket.to(roomId).emit('user-connected', userId)
         socket.on('disconnect' , () =>{
@@ -50,14 +49,13 @@ io.on('connection', socket=>{
     });
     socket.on('call', (user, caller) =>{
         console.log('caller ' ,caller);
-        const name = Object.keys(users).find(key => users[key] === user)
-        console.log('calling user: ' + user + ' with a name ' + name );
-        io.to(user).emit('incoming-call', caller);
+        io.to(users[user]).emit('incoming-call', caller);
+        
     })
 
     socket.on('whoCalled',  user =>{
         const uniqueuuid = callList[user];
-        console.log('link list ' + uniqueuuid);
+        console.log('sending link to ' + user + ' with id ' + users[user]);
         io.to(users[user]).emit('link', uniqueuuid, () =>{
             console.log('this is emited', uniqueuuid, ' to user ' + user);
         })

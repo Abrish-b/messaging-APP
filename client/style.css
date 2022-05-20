@@ -90,21 +90,12 @@ html{
     width: max-content !important;
 }
 
-form {
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: 1fr 1fr;
-}
 input{
-    grid-column: 1/4;
-    grid-row: 1/2;
     padding: 15px 10px;
     margin: 8px 0;
     box-sizing: border-box;
 }
-button {
-    grid-column: 2/4;
-    grid-row: 2/3;
+button{
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -116,10 +107,38 @@ button {
     height: 45px;
     margin-left: 2px;
     align-self: center;
+}
+.nameInput{
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: 1fr 1fr;
+}
+.nameInput input{
+    grid-column: 1/4;
+    grid-row: 1/2;
+
+}
+.nameInput button {
+    grid-column: 2/4;
+    grid-row: 2/3;  
   }
+.messageForm {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 30px;
+}
+.messageForm input{
+    width: 70%;
+    padding-left: 10px;
+    margin: 0px;
+}
+.messageForm button {
+    width: 30%;
+    height: 30px;
+}
 
 .nameWrapper{
-    height: 90vh;
+    height: 70vh;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
@@ -137,9 +156,12 @@ button {
     text-align: center;
 }
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 900px){
     .wrapper *:not(form *){
         width: 50vw;
+    }
+    .nameWrapper{
+        height: 60vh;
     }
 }
 
@@ -277,3 +299,10 @@ button {
     padding-block: 40px;
 }
 
+h1{
+    padding-top: 100px;
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
