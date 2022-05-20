@@ -164,6 +164,17 @@ button{
         height: 60vh;
     }
 }
+@media only screen and (max-width: 500px){
+    .wrapper *:not(form *){
+        width: 90vw;
+    }
+    .display{
+        min-height: 40vh;
+    }
+    .nameWrapper{
+        height: 60vh;
+    }
+}
 
 /* width */
 ::-webkit-scrollbar {
