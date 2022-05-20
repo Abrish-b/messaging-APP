@@ -47,9 +47,9 @@ io.on('connection', socket=>{
             socket.to(roomId).emit('user-disconnected', userId)
         })
     });
-    socket.on('call', (user, caller) =>{
+    socket.on('call', (user, caller, gender) =>{
         console.log('caller ' ,caller);
-        io.to(users[user]).emit('incoming-call', caller);
+        io.to(users[user]).emit('incoming-call', caller, gender);
         
     })
 

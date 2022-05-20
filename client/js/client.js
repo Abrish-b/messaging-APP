@@ -107,7 +107,7 @@ function renderAll(text, who=''){
         call.addEventListener('click' ,()=>{
             userView.style.display = 'none';
             socket.emit('on a call', me);
-            callUser(user.innerText)
+            callUser(user.innerText, sex)
         })
     }
     user.appendChild(call);
@@ -146,18 +146,18 @@ function sendMessage(mess, user){
     socket.emit('to', mess , user)
 }
 
-function callUser(calleduser){
+function callUser(calleduser, gender){
     console.log('calling user' + calleduser);
-    socket.emit('call', calleduser , me )
+    socket.emit('call', calleduser , me ,gender)
     console.log('this function emit call'); 
     setTimeout(()=>{
     location.href = `/call/${calleduser}`;
     },1000)
 }
 
-socket.on('incoming-call', user => {
+socket.on('incoming-call', (user, callergender) => {
         audio.play();
-        if (gender = 'female') {
+        if (callergender === 'female') {
             avatar.src = "/assets/images/avatar-svgrepo-com (2).svg"
             avatar.alt = "avatar-female"
         }
