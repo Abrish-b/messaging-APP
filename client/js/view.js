@@ -86,4 +86,5 @@ function connectToNewUser(userID, stream){
 
 function closeCall(){
     console.log('close call');
+    location.href = '/';
 }
