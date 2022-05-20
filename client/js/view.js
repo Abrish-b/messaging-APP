@@ -7,8 +7,8 @@ let videoAvail = true
 const peers = {}
 const socket = io()
 const myPeer = new Peer(undefined, {
-    // host: '/',
-    host: 'videomessengerapp.herokuapp.com',
+    host: '/',
+    // host: 'videomessengerapp.herokuapp.com',
     port: '3001'
 })
 
