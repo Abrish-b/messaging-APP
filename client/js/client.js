@@ -57,9 +57,11 @@ function startAPP(){
         handleForm(text)
         sex = gender.value;
     })
+
 }
 
 function handleForm(text){
+
     socket.emit('name' , text)
     socket.on('users', users=>{
         List = users;
@@ -70,7 +72,7 @@ function handleForm(text){
             }
         };
     })
-     
+ 
     
     renderAll(text, 'me');
     wrapper.style.display = 'flex';
@@ -182,3 +184,16 @@ function decline(){
     userList.style.display = 'flex';
     incomingCall.style.display = 'none';
 }
+
+socket.on('update', users => {
+    userWrapper.innerHTML = '';
+    renderdName = []
+    renderAll(me, 'me');
+    console.log('user Disconnected');
+    for (const userName of Object.keys(users)) {
+        if(userName !== me & !renderdName.includes(userName)) {
+            renderAll(userName)
+            renderdName.push(userName)
+        }
+    };
+})

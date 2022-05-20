@@ -39,6 +39,19 @@ io.on('connection', socket=>{
         io.to(users[name]).emit('mess', mess);
         console.log('sent ' + mess + ' to ' + name);
     } )
+
+    socket.on('disconnect', (reason)=>{
+        const disUser = socket.id;
+        const userName = Object.keys(users).find(key => users[key] === disUser)
+        if (userName !== undefined){
+            console.log('user: ' + userName + ' disconnected beacause of ' + reason);
+            delete users[userName];
+            console.log(users);
+            io.emit('update', users)
+        }
+        
+    } )
+
    //video call
     socket.on('join-room', (roomId, userId) =>{
         socket.join(roomId);
@@ -56,9 +69,12 @@ io.on('connection', socket=>{
     socket.on('whoCalled',  user =>{
         const uniqueuuid = callList[user];
         console.log('sending link to ' + user + ' with id ' + users[user]);
-        io.to(users[user]).emit('link', uniqueuuid, () =>{
-            console.log('this is emited', uniqueuuid, ' to user ' + user);
-        })
+        setTimeout( ()=>{
+            io.to(users[user]).emit('link', uniqueuuid, () =>{
+                console.log('this is emited', uniqueuuid, ' to user ' + user);
+            })  
+        },1000)
+       
     })
 })
 
