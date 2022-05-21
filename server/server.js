@@ -2,12 +2,14 @@ const http = require('http');
 const express = require('express');
 const socketio  = require('socket.io');
 const {v4: uuidV4 }=require('uuid')
+var path = require('path');
 const PORT = process.env.PORT || 8080;
 let callList = {}
 
 const app = express();
 app.set('view engine' , 'ejs')
-app.use(express.static(`${__dirname}/../client`));
+app.use(express.static(path.join(__dirname, 'client')));
+// app.use(express.static(`${__dirname}/../client`));
 
 
 app.get('/call/:user', (req, res) =>{
