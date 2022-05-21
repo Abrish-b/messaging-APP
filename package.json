@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"nodemon server/server.js\" \"peerjs -p 3001\"",
+    "dev": "concurrently \"nodemon server/server.js\" \"peerjs -p 433\"",
     "start": "concurrently \"node server/server.js\" \"peerjs -p 433\""
   },
   "repository": {
