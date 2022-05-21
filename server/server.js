@@ -8,7 +8,7 @@ let callList = {}
 
 const app = express();
 app.set('view engine' , 'ejs')
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, '../client')));
 // app.use(express.static(`${__dirname}/../client`));
 
 
