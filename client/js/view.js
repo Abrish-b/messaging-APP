@@ -2,6 +2,7 @@ const videoGrid = document.getElementById('video-grid')
 const muteButton = document.getElementById('mute')
 const videoButton = document.getElementById('vid-no')
 const muttie = document.querySelector('#mute .audio')
+let myStream
 let notMuted = true
 let videoAvail = true
 const peers = {}
@@ -22,15 +23,12 @@ muteButton.addEventListener('click' ,() =>{
     muteButton.classList.toggle('red');
     muttie.classList.toggle('fa-microphone');
     muttie.classList.toggle('fa-microphone-slash');
-    notMuted ? notMuted = false : notMuted = true;
-    notMuted ? stop('audio') : start('audio')
+    muteUnmute()
 } )
 
 videoButton.addEventListener('click', () => {
     videoButton.classList.toggle('red');
-    stop('video')
-    videoAvail ?  videoAvail = false :  videoAvail = true;
-    notMuted ?  stop('video') : start('video')
+    playStop()
 })
 
 
@@ -50,6 +48,7 @@ navigator.mediaDevices.getUserMedia({
    video: true,
    audio: true 
 }).then( stream => {
+    myStream = stream;
     addVideoStream(myVideo, stream);
 
     myPeer.on("call", call => {
@@ -94,4 +93,28 @@ function connectToNewUser(userID, stream){
 function closeCall(){
     console.log('close call');
     location.href = '/';
+}
+
+function playStop(){
+    const enabled = myStream.getVideoTracks()[0].enabled;
+    if(enabled){
+        myStream.getVideoTracks()[0].enabled = false;
+       videoAvail = false;
+    }
+    else {
+        myStream.getVideoTracks()[0].enabled = true;
+        videoAvail = true;
+    }
+}
+
+function muteUnmute(){
+    const enabled = myStream.getAudioTracks()[0].enabled;
+    if(enabled){
+        myStream.getAudioTracks()[0].enabled = false;
+        notMuted = false;
+    }
+    else {
+        myStream.getAudioTracks()[0].enabled = true;
+        notMuted = true;
+    }
 }
