@@ -27,6 +27,7 @@ app.set('view engine' , 'ejs')
 app.use(express.static(path.join(__dirname, '../client')));
 // app.use(express.static(`${__dirname}/../client`));
 
+app.use('/assets', express.static(path.join(__dirname,'/client'))); 
 
 app.get('/call/:user', (req, res) =>{
     const unique = uuidV4();
