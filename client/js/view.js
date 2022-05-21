@@ -8,8 +8,10 @@ const peers = {}
 const socket = io()
 const myPeer = new Peer(undefined, {
     // host: '/',
-    host:'peerjs-server.herokuapp.com',
-    secure:true,
+    path: '/peerjs',
+    host: '/',
+    // host:'peerjs-server.herokuapp.com',
+    // secure:true,
     // host: 'videomessengerapp.herokuapp.com',
     // port: '3001'
     // path : '/peerjs',
