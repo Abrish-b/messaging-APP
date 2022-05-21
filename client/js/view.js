@@ -10,7 +10,7 @@ const myPeer = new Peer(undefined, {
     // host: '/',
     host: 'videomessengerapp.herokuapp.com',
     // port: '3001'
-    path : '/peerjs',
+    // path : '/peerjs',
     port: '433'
 })
 
