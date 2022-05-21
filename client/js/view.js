@@ -47,8 +47,8 @@ const myVideo = document.createElement('video');
 myVideo.muted = true;
 
 navigator.mediaDevices.getUserMedia({
-   video: videoAvail,
-   audio: notMuted 
+   video: true,
+   audio: true 
 }).then( stream => {
     addVideoStream(myVideo, stream);
 
