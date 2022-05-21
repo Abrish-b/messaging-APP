@@ -7,6 +7,22 @@ const PORT = process.env.PORT || 8080;
 let callList = {}
 
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
+const users = {}
+
+//peer server
+// const {ExpressPeerServer} = require('peer');
+// const peerServer = ExpressPeerServer(server, {
+//     // proxied: true,
+//     // port: 433, 
+//     // path: '/abrishapp',
+//     debug: true,
+//     // ssl: {}
+// });
+// app.use(peerServer);
+
 app.set('view engine' , 'ejs')
 app.use(express.static(path.join(__dirname, '../client')));
 // app.use(express.static(`${__dirname}/../client`));
@@ -23,11 +39,7 @@ app.get('/:room', (req, res)=>{
     res.render('room',{roomId:req.params.room})
 })
 
-const server = http.createServer(app);
-const io = socketio(server);
 
-
-const users = {}
 
 io.on('connection', socket=>{
     socket.on('name', name=>{
