@@ -25,7 +25,7 @@ const users = {}
 
 app.set('view engine' , 'ejs')
 app.use(express.static(path.join(__dirname, '../client')));
-// app.use(express.static(`${__dirname}/../client`));
+app.use('/assets/audio', express.static(`${__dirname}/../client/assets/audio`));
 
 
 app.get('/call/:user', (req, res) =>{
