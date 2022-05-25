@@ -13,7 +13,7 @@ html{
     flex-flow: column wrap;
     align-items: center;
     justify-content: center;
-    /* height: 95vh; */
+    height: 85vh;
     row-gap: 10px;
 }
 .header{
@@ -108,10 +108,9 @@ button{
     align-self: center;
 }
 .nameInput{
-    margin-inline: 20px;
     flex-shrink: 1;
     display: grid;
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(4, 100px);
     grid-template-rows: 1fr 1fr;
 }
 .nameInput input{
@@ -182,6 +181,10 @@ button{
     .wrapper *:not(form *){
         width: 50vw;
     }
+    .nameInput{
+        margin-inline: 20px;
+        grid-template-columns: repeat(4, 25%) !important;
+    }
 }
 @media (max-width: 500px){
     h1{
@@ -194,17 +197,18 @@ button{
         min-height: 40vh;
     }
     #video-grid{
-        display: flex;
-        flex-flow: column wrap;
+        display: flex !important;
+        flex-flow: column-reverse wrap;
         row-gap: 20px;
     }
     .image img{
         max-width: 200px;
         max-height: 400px;
     }
-    /* .nameInput{
+    .nameInput{
+        margin-inline: 20px;
         grid-template-columns: repeat(4, 25%) !important;
-    } */
+    }
 }
 
 /* width */
@@ -272,6 +276,8 @@ button{
 } */
 
 .toggler{
+    padding-block: 10px;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
