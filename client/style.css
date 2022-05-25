@@ -199,6 +199,7 @@ button{
     #video-grid{
         display: flex !important;
         flex-flow: column-reverse wrap;
+        align-items: center;
         row-gap: 20px;
     }
     .image img{
