@@ -24,7 +24,8 @@ const users = {}
 // app.use(peerServer);
 
 app.set('view engine' , 'ejs')
-app.use(express.static(path.join(__dirname, '../client')));
+app.use('/',express.static(path.join(__dirname, '../client')));
+app.use('/audio/Hello.mp3',express.static(path.join(__dirname, '../client/assets/audio/Hello.mp3')));
 
 
 app.get('/call/:user', (req, res) =>{
