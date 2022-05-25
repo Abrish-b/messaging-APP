@@ -5,6 +5,10 @@ html{
     font-family: 'Roboto Mono', monospace;
     box-sizing: border-box;
 }
+body{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 .wrapper *:not(form *){
     width: 50vw;
 }

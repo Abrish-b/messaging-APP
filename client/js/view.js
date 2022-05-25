@@ -46,7 +46,7 @@ const myVideo = document.createElement('video');
 if(isSafari == true){
     myVideo.setAttribute('autoplay', '');
     myVideo.setAttribute('muted', '');
-    myVideo.setAttribute('playsinline', '');
+    myVideo.setAttribute('playsinline', true);
 }
 else{
     myVideo.muted = true;
