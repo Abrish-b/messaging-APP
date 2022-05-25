@@ -34,15 +34,16 @@ function startAPP(){
     dispName.innerHTML = `
     <h1>Welcome to Messaging App</h1>
     <div class="nameWrapper">
-    <h2> Write your Name and Gender </h2>
-    <form class="nameInput" id="form1">
-    <input type="text" id="name">
-    <select name="gender" id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-  </select>
-    <button id="submitButton">send</button>
-    </form>
+        <div class="image"><img src="../assets/images/videochiama.gif" alt="landingGIF"></div>
+        <h2> Write your Name and Gender </h2>
+        <form class="nameInput" id="form1">
+            <input type="text" id="name">
+            <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <button id="submitButton">send</button>
+        </form>
     <div>
     `;
     const formName = document.querySelector('#form1');

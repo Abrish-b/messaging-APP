@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 html{
     width: 100vw;
-    height: 100vh;
     background-color: cadetblue;
     font-family: 'Roboto Mono', monospace;
     box-sizing: border-box;
@@ -14,7 +13,7 @@ html{
     flex-flow: column wrap;
     align-items: center;
     justify-content: center;
-    height: 95vh;
+    /* height: 95vh; */
     row-gap: 10px;
 }
 .header{
@@ -109,8 +108,10 @@ button{
     align-self: center;
 }
 .nameInput{
+    margin-inline: 20px;
+    flex-shrink: 1;
     display: grid;
-    grid-template-columns: repeat(4, 100px);
+    grid-template-columns: repeat(4, 25%);
     grid-template-rows: 1fr 1fr;
 }
 .nameInput input{
@@ -138,11 +139,27 @@ button{
 }
 
 .nameWrapper{
-    height: 70vh;
+    /* height: 70vh; */
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
+    row-gap: 30px;
+}
+.nameWrapper .image{
+    margin-top: 50px;
+    text-align: center;
+    width: 90vw;
+}
+.image img{
+    object-fit: cover;
+    max-width: 300px;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+}
+.nameWrapper h2{
+    width: 90vw;
 }
 
 #gender{
@@ -153,27 +170,41 @@ button{
 }
 
 .bottom{
+    margin-top: 50px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-@media only screen and (max-width: 900px){
+@media (max-width: 900px) and (min-width: 500px){
+    h1{
+        padding-top: 50px !important;
+    }
     .wrapper *:not(form *){
         width: 50vw;
     }
-    .nameWrapper{
-        height: 60vh;
-    }
 }
-@media only screen and (max-width: 500px){
+@media (max-width: 500px){
+    h1{
+        padding-top: 20px !important;
+    }
     .wrapper *:not(form *){
         width: 90vw;
     }
     .display{
         min-height: 40vh;
     }
-    .nameWrapper{
-        height: 60vh;
+    #video-grid{
+        display: flex;
+        flex-flow: column wrap;
+        row-gap: 20px;
     }
+    .image img{
+        max-width: 200px;
+        max-height: 400px;
+    }
+    /* .nameInput{
+        grid-template-columns: repeat(4, 25%) !important;
+    } */
 }
 
 /* width */
@@ -219,7 +250,7 @@ button{
   width: 90vw !important;
   column-gap: 20px;
   display: grid;
-  grid-template-columns:  300px 300px ;  
+  grid-template-columns:  450px 450px ;  
   grid-auto-rows: 300px;
   justify-content: center;
 }
@@ -311,7 +342,7 @@ button{
 }
 
 h1{
-    padding-top: 100px;
+    padding-top: 80px;
     text-align: center;
 }
 h2{
