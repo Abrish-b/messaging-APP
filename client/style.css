@@ -211,6 +211,7 @@ button{
     }
     #video-grid video{
         max-width: 250px;
+        max-height: 187.5px;
     }
 }
 
