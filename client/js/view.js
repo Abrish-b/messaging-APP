@@ -43,6 +43,20 @@ myPeer.on('open' , id =>{
 
 const myVideo = document.createElement('video');
 myVideo.muted = true;
+if (navigator.mediaDevices === undefined) {
+    navigator.mediaDevices = {};
+  }
+if (navigator.mediaDevices.getUserMedia === undefined) {
+    navigator.mediaDevices.getUserMedia = function(constraints) {
+    var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    if (!getUserMedia) {
+        return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+      }
+      return new Promise(function(resolve, reject) {
+        getUserMedia.call(navigator, constraints, resolve, reject);
+      });
+    }
+  }
 
 navigator.mediaDevices.getUserMedia({
    video: true,
@@ -63,10 +77,17 @@ navigator.mediaDevices.getUserMedia({
         setTimeout(connectToNewUser,1000,userID,stream)
         // connectToNewUser(userID, stream)
       });
-})
+}).catch(function(err) {
+    console.log(err.name + ": " + err.message);
+  });
 
 function addVideoStream(video, stream){
-    video.srcObject = stream;
+    if ("srcObject" in video){
+        video.srcObject = stream;
+    }
+    else{
+        video.src = window.URL.createObjectURL(stream); 
+    }   
     video.addEventListener('loadedmetadata' , () => {
         video.play()
         
