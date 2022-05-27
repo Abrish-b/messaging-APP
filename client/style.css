@@ -317,6 +317,14 @@ button{
     background-color: red;
 }
 
+.outgoing-call{
+    display: none;
+    background-color: lightgreen;
+    /* display: flex; */
+    flex-flow: column wrap;
+    align-items: center;
+}
+
 .incoming-call{
     display: none;
     background-color: lightgreen;
@@ -324,11 +332,20 @@ button{
     flex-flow: column wrap;
     align-items: center;
 }
+.calledName{
+    padding-top: 20px;
+    text-align: center;
+}
+
 .callerName{
     padding-top: 20px;
     text-align: center;
 }
 .incoming-call i{
+    width: 20px !important;
+    height: 20px;
+}
+.outgoing-call i{
     width: 20px !important;
     height: 20px;
 }

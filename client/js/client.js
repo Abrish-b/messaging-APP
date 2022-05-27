@@ -4,6 +4,7 @@ let renderdName = []
 let me
 let caller
 let sex
+let picked = false
 //graping elements
 const wrapper = document.querySelector('.wrapper');
 // const users = document.querySelectorAll('.user');
@@ -17,9 +18,13 @@ const message = document.getElementById('message');
 const display = document.getElementById('display')
 const userWrapper = document.querySelector('.userWrapper');
 const audio = new Audio('audio/hello.mp3');
+const ring = new Audio('audio/ringing.mp3');
 const incomingCall = document.querySelector('.incoming-call');
+const outgoingCall = document.querySelector('.outgoing-call');
 const callerName = document.querySelector('.callerName');
-const avatar = document.querySelector('.avatarImage');
+const calledName = document.querySelector('.calledName');
+const avatarInc = document.querySelector('.avatarImage.incoming');
+const avatarOut = document.querySelector('.avatarImage.outgoing');
 
 display.innerHTML = '';
 
@@ -54,16 +59,16 @@ function startAPP(){
         e.preventDefault()
         const text = name.value;
         dispName.innerHTML = '';
+        sex = gender.value;
         if(text == '') return
         handleForm(text)
-        sex = gender.value;
     })
 
 }
 
 function handleForm(text){
 
-    socket.emit('name' , text)
+    socket.emit('name' , text, sex)
     socket.on('users', users=>{
         List = users;
         for (const userName of Object.keys(users)) {
@@ -149,20 +154,19 @@ function sendMessage(mess, user){
     socket.emit('to', mess , user)
 }
 
-function callUser(calleduser, gender){
-    console.log('calling user' + calleduser);
-    socket.emit('call', calleduser , me ,gender)
-    console.log('this function emit call'); 
-    setTimeout(()=>{
-    location.href = `/call/${calleduser}`;
-    },1000)
+function callUser(calleduser){
+    socket.emit('call', calleduser , me )
+
+    // setTimeout(()=>{
+    // location.href = `/call/${calleduser}`;
+    // },1000)
 }
 
 socket.on('incoming-call', (user, callergender) => {
         audio.play();
         if (callergender === 'female') {
-            avatar.src = "/assets/images/avatar-svgrepo-com (2).svg"
-            avatar.alt = "avatar-female"
+            avatarInc.src = "/assets/images/avatar-svgrepo-com (2).svg"
+            avatarInc.alt = "avatar-female"
         }
         userList.style.display = 'none';
         incomingCall.style.display = 'flex';
@@ -172,29 +176,62 @@ socket.on('incoming-call', (user, callergender) => {
 
 
 function AnsweredVideo(){
-    socket.emit('whoCalled', me) 
-    socket.on('link', unique => {
-        location.href = `/${unique}`
-        })
-
-   
+    socket.emit('answer', me)
+    setTimeout(() => {
+        socket.emit('whoCalled', me)
+    }, 500);    
+ 
 }
+socket.on('link', unique => {
+    setTimeout(() => {
+        location.href = `/${unique}`
+    }, 1500);
+    })
 
-function decline(){
+function decline(){  
     audio.pause();
+    socket.emit('decline', me)
     userList.style.display = 'flex';
     incomingCall.style.display = 'none';
+}
+
+function callerdecline(){
+    ring.pause();
+    userList.style.display = 'flex';
+    outgoingCall.style.display = 'none';
 }
 
 socket.on('update', users => {
     userWrapper.innerHTML = '';
     renderdName = []
     renderAll(me, 'me');
-    console.log('user Disconnected');
     for (const userName of Object.keys(users)) {
         if(userName !== me & !renderdName.includes(userName)) {
             renderAll(userName)
             renderdName.push(userName)
         }
     };
+})
+
+
+socket.on('outgoing-call', (calledgender, calledname) =>{
+    ring.play();
+    if (calledgender === 'female') {
+        avatarOut.src = "/assets/images/avatar-svgrepo-com (2).svg"
+        avatarOut.alt = "avatar-female"
+    }
+    userView.style.display = 'none';
+    userList.style.display = 'none';
+    outgoingCall.style.display = 'flex';
+    calledName.innerText =  calledname
+})
+
+socket.on('answered', (calleduser) => {
+    location.href = `/call/${calleduser}`;
+})
+
+socket.on('declined', () => {
+    ring.pause();
+    userList.style.display = 'flex';
+    outgoingCall.style.display = 'none';
 })

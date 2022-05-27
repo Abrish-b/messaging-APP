@@ -11,6 +11,8 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const users = {}
+const genders = {}
+const callLog = {}
 
 //peer server
 // const {ExpressPeerServer} = require('peer');
@@ -26,7 +28,7 @@ const users = {}
 app.set('view engine' , 'ejs')
 app.use('/',express.static(path.join(__dirname, '../client')));
 app.use('/audio/Hello.mp3',express.static(path.join(__dirname, '../client/assets/audio/Hello.mp3')));
-
+app.use('/audio/ringing.mp3',express.static(path.join(__dirname, '../client/assets/audio/ringing.mp3')));
 
 app.get('/call/:user', (req, res) =>{
     const unique = uuidV4();
@@ -42,9 +44,10 @@ app.get('/:room', (req, res)=>{
 
 
 io.on('connection', socket=>{
-    socket.on('name', name=>{
+    socket.on('name', (name, sex)=>{
         console.log(name , ' connected with:' + socket.id );
         users[name] = socket.id;
+        genders[name] = sex
         console.log(users);
         io.emit('users', users)
         // socket.broadcast.emit('users', users)
@@ -74,20 +77,34 @@ io.on('connection', socket=>{
             socket.to(roomId).emit('user-disconnected', userId)
         })
     });
-    socket.on('call', (user, caller, gender) =>{
-        console.log('caller ' ,caller);
-        io.to(users[user]).emit('incoming-call', caller, gender);
+   
+    socket.on('call', (called, caller) =>{
+
+        callLog[called] = caller;
         
+        io.to(users[called]).emit('incoming-call', caller, genders[called], () =>{
+            console.log('incoming-call from ' + caller);
+        });
+        io.to(users[caller]).emit('outgoing-call', genders[called], called, () =>{
+            console.log('outgoing-call from ' + called);
+        });
+       
     })
+    socket.on('answer' ,me =>{
+        io.to(users[callLog[me]]).emit('answered', me)
+    } )
+    socket.on('decline' ,me =>{
+        io.to(users[callLog[me]]).emit('declined')
+    } )
 
     socket.on('whoCalled',  user =>{
         const uniqueuuid = callList[user];
         console.log('sending link to ' + user + ' with id ' + users[user]);
-        setTimeout( ()=>{
-            io.to(users[user]).emit('link', uniqueuuid, () =>{
-                console.log('this is emited', uniqueuuid, ' to user ' + user);
-            })  
-        },1000)
+        
+        io.to(users[user]).emit('link', uniqueuuid, () =>{
+            console.log('this is emited', uniqueuuid, ' to user ' + user);
+        })  
+        
        
     })
 })
