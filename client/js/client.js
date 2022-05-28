@@ -39,7 +39,7 @@ function startAPP(){
     wrapper.style.display = 'none';
     const dispName = document.querySelector('.name');
     dispName.innerHTML = `
-    <h1>Welcome to Messaging App</h1>
+    <h1>Welcome to Messenging App</h1>
     <div class="nameWrapper">
         <div class="image"><img src="../assets/images/videochiama.gif" alt="landingGIF"></div>
         <h2> Write your Name and Gender </h2>
