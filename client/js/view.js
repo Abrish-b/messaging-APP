@@ -77,8 +77,8 @@ navigator.mediaDevices.getUserMedia({
         call.answer(stream)
         const userVideo = document.createElement('video')
         if(isIphone == true){
-            myVideo.setAttribute('autoplay', '');
-            myVideo.setAttribute('playsinline', true);
+            userVideo.setAttribute('autoplay', '');
+            userVideo.setAttribute('playsinline', true);
         }
         call.on('stream', userStream => {
             addVideoStream(userVideo, userStream)
