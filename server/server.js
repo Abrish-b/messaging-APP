@@ -96,6 +96,11 @@ io.on('connection', socket=>{
     socket.on('decline' ,me =>{
         io.to(users[callLog[me]]).emit('declined')
     } )
+    socket.on('declineCaller' ,me =>{
+        const called =Object.keys(callLog).find(key => callLog[key] === me);
+        io.to(users[called]).emit('callCancelled')
+    } )
+
 
     socket.on('whoCalled',  user =>{
         const uniqueuuid = callList[user];

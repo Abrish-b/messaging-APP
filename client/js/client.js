@@ -196,6 +196,7 @@ function decline(){
 }
 
 function callerdecline(){
+    socket.emit('declineCaller', me)
     ring.pause();
     userList.style.display = 'flex';
     outgoingCall.style.display = 'none';
@@ -234,4 +235,9 @@ socket.on('declined', () => {
     ring.pause();
     userList.style.display = 'flex';
     outgoingCall.style.display = 'none';
+})
+socket.on('callCancelled', () => {
+    audio.pause();
+    userList.style.display = 'flex';
+    incomingCall.style.display = 'none';
 })
