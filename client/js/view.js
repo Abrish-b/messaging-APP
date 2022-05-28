@@ -76,6 +76,10 @@ navigator.mediaDevices.getUserMedia({
     myPeer.on("call", call => {
         call.answer(stream)
         const userVideo = document.createElement('video')
+        if(isIphone == true){
+            myVideo.setAttribute('autoplay', '');
+            myVideo.setAttribute('playsinline', true);
+        }
         call.on('stream', userStream => {
             addVideoStream(userVideo, userStream)
         })
