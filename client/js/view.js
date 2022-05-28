@@ -2,7 +2,7 @@ const videoGrid = document.getElementById('video-grid')
 const muteButton = document.getElementById('mute')
 const videoButton = document.getElementById('vid-no')
 const muttie = document.querySelector('#mute .audio')
-const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+const isIphone = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
 let myStream
 let notMuted = true
 let videoAvail = true
@@ -43,7 +43,7 @@ myPeer.on('open' , id =>{
 })
 
 const myVideo = document.createElement('video');
-if(isSafari == true){
+if(isIphone == true){
     myVideo.setAttribute('autoplay', '');
     myVideo.setAttribute('muted', '');
     myVideo.setAttribute('playsinline', true);
